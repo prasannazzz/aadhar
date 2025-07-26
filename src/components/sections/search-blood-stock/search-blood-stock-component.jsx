@@ -41,10 +41,15 @@ const SearchBloodStockComponent = ({
 							<option value="O+">O+</option>
 							<option value="O-">O-</option>
 						</select>
-						<button className="sm:col-span-2 sm:rounded-r-rsm border-dark text-white bg-dark hover:border-dark hover:bg-dark_red hover:text-white transition text-black px-8 py-5 text-sm font-bold">
+						<button className="sm:col-span-2 sm:rounded-r-rsm border border-dark text-white bg-red 
+hover:bg-red hover:text-white hover:border-dark 
+hover:scale-105 hover:shadow-lg hover:-translate-y-1 
+transition-all duration-300 ease-in-out 
+px-8 py-5 text-sm font-bold cursor-pointer">
+
 							Search Availability
 						</button>
-					</form>
+					</form> 
 
 					<div className="mt-10 w-full bg-[#d9d9d9] rounded-rsm p-5 justify-start items-start overflow-x-scroll">
 						<table className="w-full overflow-x-scroll">

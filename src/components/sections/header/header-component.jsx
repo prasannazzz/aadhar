@@ -26,8 +26,10 @@ const HeaderComponent = () => {
 	const [isActiveName, setIsActiveName] = useState(null);
 
 	const reuseableClass = {
-		for_last: `last:bg-red last:text-white last:hover:bg-white last:hover:text-dark`,
-		for_second_last: `rounded-rsm border border-white/[.5] hover:bg-white hover:text-dark`,
+		for_last: `last:bg-red last:text-white last:hover:bg-red last:hover:text-dark hover:scale-105 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-in-out`,
+
+
+		for_second_last: `rounded-rsm border border-white/[.5] hover:bg-red hover:text-dark`,
 	};
 
 	useEffect(() => {
@@ -44,7 +46,7 @@ const HeaderComponent = () => {
 			onScroll={() => setBlurActivation(true)}
 			className={`fixed inset-x-0 top-0 z-50 border-b border-white/[.2] ${
 				blurActivation ? "bg-dark/[.6] backdrop-blur-md" : ""
-			}`}
+			}`} 
 		>
 			<nav
 				className="flex items-center justify-between p-6 lg:px-8 w-[min(1250px,100%-15px)] m-auto"
@@ -81,12 +83,14 @@ const HeaderComponent = () => {
 							}}
 							to={item.href}
 							active="bg-red"
-							className={`text-sm font-medium hover:bg-red lg:transition leading-6 text-off_white px-3 py-2 rounded-rsm ${
-								item.secondLast &&
-								`${reuseableClass.for_second_last}`
-							} ${item.last && `${reuseableClass.for_last}`} ${
-								isActiveName == item.name ? `bg-dark` : ``
-							}`}
+							className={`text-sm font-medium text-off_white px-3 py-2 rounded-rsm 
+	hover:bg-red hover:text-dark 
+	hover:scale-105 hover:shadow-lg hover:-translate-y-1 
+	transition-all duration-300 ease-in-out
+	${item.secondLast ? reuseableClass.for_second_last : ""} 
+	${item.last ? reuseableClass.for_last : ""} 
+	${isActiveName === item.name ? "bg-dark" : ""}`}
+
 						>
 							{item.name}
 						</NavLink>
@@ -153,7 +157,7 @@ const HeaderComponent = () => {
 				</Dialog.Panel>
 			</Dialog>
 		</header>
-	);
+	); 
 };
 
 export default HeaderComponent;

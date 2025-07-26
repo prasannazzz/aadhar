@@ -8,15 +8,18 @@ export default {
 			serif: ["Arapey", "serif"],
 		},
 		colors: {
-			dark: "#161A1B",
+			dark: "#FFEAEB", //light pink
 			light: "#4F5561",
-			dark_red: "#260303",
-			red: "#400606",
+			dark_red: "#C43138",
+			red: "#C43138",
+			hoverlightred: "#a0484dff",
+			lightred: "#7f2226ff",
 			off_white: "#F2F2F2",
 			white: "#FFFFFF",
 			gray: "#999999",
 			dark_gray: "#444444",
-			green: "rgb(20 83 45)",
+			green: "#ca7579ff",
+			black: "#000000",
 		},
 		borderRadius: {
 			full: "999px",

@@ -103,7 +103,7 @@ const DonateBloodPage = () => {
 		},
 		stepsText: {
 			subheadingText: "Donation Process",
-			headingText: "Step-by-Step Guide to Donating Blood",
+			headingText: "Step-by-Step Guide to Donate Blood",
 		},
 	};
 

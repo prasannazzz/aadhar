@@ -15,7 +15,7 @@ const ProcessStepComponent = ({
 				</span>
 			</div>
 			<div className="step-content-wrapper">
-				<h3 className="step-name not-italic font-bold text-[25px] leading-[41px] capitalize text-dark">
+				<h3 className="step-name not-italic font-bold text-[25px] leading-[41px] capitalize text-black">
 					{stepName}
 				</h3>
 				<ParaComponent innerText={stepDescription} />

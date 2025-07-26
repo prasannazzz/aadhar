@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-:root {
+/* contains all root colors */
+:root { 
 	--dark: #161a1b;
 	--dark_overlay: #161a1b56;
 	--light: #4f5561;

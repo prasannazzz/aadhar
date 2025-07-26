@@ -11,7 +11,8 @@ const FormComponent = ({
 	handleSubmit,
 }) => {
 	const [status, setStatus] = useState("Pending");
-	const inputStyles = `block w-full flex justify-start items-start rounded-rsm border-0 px-8 py-3 md:px-10 md:py-4 bg-light text-white ring-none placeholder:text-white outline-none focus:ring-1 focus:ring-center focus:bg-dark focus:ring-light sm:text-sm sm:leading-6`;
+	const inputStyles = `block w-full flex justify-start items-start rounded-rsm border-0 px-8 py-3 md:px-10 md:py-4 bg-dark
+	 text-black ring-none placeholder:text-black outline-none focus:ring-1 focus:ring-center focus:bg-dark focus:ring-light sm:text-sm sm:leading-6`;
 	return (
 		<WrapperSection>
 			<div
@@ -74,7 +75,12 @@ const FormComponent = ({
 									handleSubmit(e);
 									setStatus("Submited");
 								}}
-								className={` rounded-rsm border border-white hover:border-red text-dark bg-white hover:bg-red hover:text-white transition px-10 py-4 text-sm w-fit font-bold w-fit cursor-pointer`}
+								className={`rounded-rsm border border-red text-dark bg-red 
+								hover:bg-red hover:text-dark hover:border-red 
+								hover:scale-105 hover:shadow-lg hover:-translate-y-1 
+								transition-all duration-300 ease-in-out 
+								px-10 py-4 text-sm w-fit font-bold cursor-pointer`}
+
 							>
 								{buttonText}
 							</button>

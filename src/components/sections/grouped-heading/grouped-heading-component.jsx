@@ -15,7 +15,7 @@ const GroupedHeadingComponent = ({
 				className={`
 				${position == "center" ? `text-center` : `text-left`}
 				${
-					mode == "light" ? `text-white` : `text-red`
+					mode == "light" ? `text-white` : `text-black`
 				} not-italic font-medium text-[16px] sm:text-[20px] leading-normal tracking-[0.2em] uppercase`}
 			>
 				{subheadingText}
@@ -24,7 +24,7 @@ const GroupedHeadingComponent = ({
 				className={`
 					${position == "center" ? `text-center` : `text-left`}
 				${
-					mode == "light" ? `text-white` : `text-dark`
+					mode == "light" ? `text-white` : `text-red`
 				} cta-heading not-italic font-semibold text-[35px] sm:text-[55px] leading-tight capitalize`}
 			>
 				{headingText}

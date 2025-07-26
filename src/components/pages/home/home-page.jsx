@@ -8,11 +8,12 @@ import HeaderComponent from "../../sections/header/header-component";
 import BeforeFooterCTA from "../../sections/before-footer-cta/before-footer-cta-components";
 import FooterComponent from "../../sections/footer/footer-component";
 
+
 const HomePage = () => {
 	const HomePageDetails = {
 		donate_blood: {
 			subheadingText: "Save Lives Today",
-			headingText: "Donate Blood with Aadhar Blood bank",
+			zheadingText: "Donate Blood with Aadhar Blood bank",
 			classHint: "side-col-image donate-blood-with-hemocell",
 			paraText:
 				"Our mission is to create a community of donors who make a difference in the lives of others. We prioritize the safety and comfort of our donors and patients, and provide the highest quality of care to ensure an easy and convenient donation process. Join us in our life-saving mission.",

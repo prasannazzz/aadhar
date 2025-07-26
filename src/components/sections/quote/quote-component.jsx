@@ -8,6 +8,7 @@ const QuoteComponent = ({
 	classHint,
 	buttonHave,
 	buttonText,
+	
 	buttonLink,
 }) => {
 	return (
