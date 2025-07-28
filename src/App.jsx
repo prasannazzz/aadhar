@@ -5,6 +5,7 @@ import HostBloodDrivePage from "./components/pages/host-blood-drive/host-blood-d
 import NeedBloodPage from "./components/pages/need-blood/need-blood-page";
 import ContactPage from "./components/pages/contact/contact-page";
 import Admin from "./components/layouts/admin";
+import OrganizationPage from "./components/pages/organization/OrganizationPage";
 
 import Dashboard from "../src/components/views/admin/dashboard";
 import AdminDonateBlood from "../src/components/views/admin/admin-donate-blood";
@@ -23,6 +24,7 @@ export default function App() {
 					path="/host-blood-drive"
 					element={<HostBloodDrivePage />}
 				/>
+				 <Route path="/organization" element={<OrganizationPage />} />
 				<Route path="/donate-blood" element={<DonateBloodPage />} />
 				<Route path="/need-blood" element={<NeedBloodPage />} />
 				<Route path="/contact" element={<ContactPage />} />

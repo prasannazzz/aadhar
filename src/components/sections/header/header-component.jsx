@@ -1,49 +1,57 @@
 import { useState, useEffect } from "react";
-
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+
 
 import BlackLogo from "../../../../public/HemoCell Logo black.png";
 import WhiteLogo from "../../../../public/HemoCell Logo White.png";
 
 const navigation = [
 	{ name: "Home", href: "/" },
+	{
+        name: "The Organization",
+        href: "/organization",
+        children: [
+            { name: "About Us", href: "/organization#about-us" },
+            { name: "Our Trustees", href: "/organization#trustees" },
+            { name: "Our Director", href: "/organization#director" },
+            { name: "Our Officers", href: "/organization#officers" },
+            { name: "Our Captains", href: "/organization#captains" },
+            { name: "Government Approval & Recognitions", href: "/organization#approvals" },
+        ]
+    },
 	{ name: "Host Blood Drive", href: "/host-blood-drive" },
 	{ name: "Donate Money", href: "/donate-blood" },
 	{ name: "Help Needed", href: "/contact" },
 	{ name: "Need Blood", href: "/need-blood", secondLast: true },
 	{ name: "Donate Blood", href: "/donate-blood", last: true },
+
 ];
-// const logoUrl = "../public/HemoCell Logo black.png";
-// const logoUrlWhite = "../public/HemoCell Logo White.png";
 const compnayName = "Aadhar Blood Bank";
 
 const HeaderComponent = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-	const [offset, setOffset] = useState(0);
 	const [blurActivation, setBlurActivation] = useState(false);
-	const [isActiveName, setIsActiveName] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
+    const location = useLocation();
 
 	const reuseableClass = {
 		for_last: `last:bg-red last:text-white last:hover:bg-red last:hover:text-dark hover:scale-105 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-in-out`,
-
-
 		for_second_last: `rounded-rsm border border-white/[.5] hover:bg-red hover:text-dark`,
 	};
 
 	useEffect(() => {
 		const onScroll = () => {
-			setOffset(window.pageYOffset);
 			setBlurActivation(window.pageYOffset > 5);
 		};
-
 		window.addEventListener("scroll", onScroll, { passive: true });
+        setActiveDropdown(null);
 		return () => window.removeEventListener("scroll", onScroll);
-	}, []);
+	}, [location]);
+
 	return (
 		<header
-			onScroll={() => setBlurActivation(true)}
 			className={`fixed inset-x-0 top-0 z-50 border-b border-white/[.2] ${
 				blurActivation ? "bg-dark/[.6] backdrop-blur-md" : ""
 			}`} 
@@ -52,7 +60,6 @@ const HeaderComponent = () => {
 				className="flex items-center justify-between p-6 lg:px-8 w-[min(1250px,100%-15px)] m-auto"
 				aria-label="Global"
 			>
-				{/* Logo */}
 				<div className="flex lg:flex-1">
 					<a href="/" className="-m-1.5 p-1.5">
 						<span className="sr-only">{compnayName}</span>
@@ -60,7 +67,6 @@ const HeaderComponent = () => {
 					</a>
 				</div>
 
-				{/* Mobile menu button hidden on large screens */}
 				<div className="flex lg:hidden">
 					<button
 						type="button"
@@ -72,33 +78,60 @@ const HeaderComponent = () => {
 					</button>
 				</div>
 
-				{/* Desktop navigation */}
-				<div className="hidden lg:flex lg:gap-x-4 lg:transition">
+				<div className="hidden lg:flex lg:gap-x-4 lg:items-center">
 					{navigation.map((item) => (
-						<NavLink
-							key={item.name}
-							onClick={() => {
-								setIsActiveName(item.name);
-								setMobileMenuOpen(false);
-							}}
-							to={item.href}
-							active="bg-red"
-							className={`text-sm font-medium text-off_white px-3 py-2 rounded-rsm 
-	hover:bg-red hover:text-dark 
-	hover:scale-105 hover:shadow-lg hover:-translate-y-1 
-	transition-all duration-300 ease-in-out
-	${item.secondLast ? reuseableClass.for_second_last : ""} 
-	${item.last ? reuseableClass.for_last : ""} 
-	${isActiveName === item.name ? "bg-dark" : ""}`}
-
-						>
-							{item.name}
-						</NavLink>
-					))}
+            item.children ? (
+                <div
+                    key={item.name}
+                    className="relative"
+                    onMouseEnter={() => setActiveDropdown(item.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                >
+                    <NavLink
+                        to={item.href}
+                        className="text-sm font-medium text-off_white px-3 py-2 rounded-rsm hover:bg-red hover:text-dark hover:scale-105 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-in-out"
+                    >
+                        {item.name}
+                    </NavLink>
+                    {activeDropdown === item.name && (
+                        // --- These are the updated styles for the dropdown ---
+                        <div className="absolute top-full left-0 mt-2 bg-white/30 backdrop-blur-lg rounded-lg shadow-2xl border border-white/20 py-1 w-64 z-50">
+                            {item.children.map(child => (
+                                <NavLink
+                                    key={child.name}
+                                    to={child.href}
+                                    onClick={() => setActiveDropdown(null)}
+                                    // --- Updated text color and hover effect ---
+                                    className="block px-4 py-2 text-sm text-black font-medium hover:bg-white/50 rounded-md m-1"
+                                >
+                                    {child.name}
+                                </NavLink>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <NavLink
+                    key={item.name}
+                    to={item.href}
+                    className={({ isActive }) =>
+                        `text-sm font-medium text-off_white px-3 py-2 rounded-rsm 
+                        hover:bg-red hover:text-dark 
+                        hover:scale-105 hover:shadow-lg hover:-translate-y-1 
+                        transition-all duration-300 ease-in-out
+                        ${item.secondLast ? reuseableClass.for_second_last : ""} 
+                        ${item.last ? reuseableClass.for_last : ""} 
+                        ${isActive ? "bg-dark_red" : ""}`
+                    }
+                >
+                    {item.name}
+                </NavLink>
+            )
+        ))}
 				</div>
 			</nav>
 
-			{/* Mobile menu */}
+			{/* Mobile menu remains the same */}
 			<Dialog
 				as="div"
 				className="lg:hidden"
@@ -129,27 +162,39 @@ const HeaderComponent = () => {
 						<div className="-my-6 divide-y divide-gray-500/10">
 							<div className="py-6 space-y-2">
 								{navigation.map((item) => (
-									<NavLink
-										key={item.name}
-										onClick={() => {
-											setIsActiveName(item.name);
-											setMobileMenuOpen(false);
-										}}
-										to={item.href}
-										className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-dark px-3 py-2 rounded-rsm ${
-											item.secondLast &&
-											`rounded-rsm border border-dark/[.5] hover:bg-white hover:text-dark`
-										} ${
-											item.last &&
-											`last:bg-red last:text-white last:hover:bg-white last:hover:text-dark`
-										} ${
-											isActiveName == item.name
-												? `bg-dark text-white`
-												: ``
-										}`}
-									>
-										{item.name}
-									</NavLink>
+									item.children ? (
+										<div key={item.name} className="-mx-3">
+												<p className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900">
+														{item.name}
+												</p>
+												<div className="ml-4 mt-2 space-y-1">
+														{item.children.map(child => (
+																<NavLink
+																		key={child.name}
+																		to={child.href}
+																		onClick={() => setMobileMenuOpen(false)}
+																		className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-700 hover:bg-gray-100"
+																>
+																		{child.name}
+																</NavLink>
+														))}
+												</div>
+										</div>
+								) : (
+										<NavLink
+											key={item.name}
+											to={item.href}
+											onClick={() => setMobileMenuOpen(false)}
+											className={({ isActive }) =>
+												`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100
+												${item.secondLast ? 'border border-dark/[.5]' : ''}
+												${item.last ? 'bg-red text-white hover:bg-red hover:text-dark' : ''}
+												${isActive ? 'bg-gray-200' : ''}`
+											}
+										>
+											{item.name}
+										</NavLink>
+								)
 								))}
 							</div>
 						</div>
